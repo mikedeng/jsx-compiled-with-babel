@@ -9,6 +9,12 @@ function _defineProperty(obj, key, value) {
 
 import React, { Component } from 'react';
 
+class ChildCmp extends Component {
+	render() {
+		return React.createElement('button', null, this.props.liked ? '喜欢' : '不喜欢');
+	}
+}
+
 class TestApp extends Component {
 	constructor(...args) {
 		super(...args);
@@ -21,20 +27,23 @@ class TestApp extends Component {
 	render() {
 		var _this = this;
 
-		if (this.state.liked) {
-			return React.createElement('span', null, '\u5DF2\u559C\u6B22!');
-		}
-
 		return React.createElement(
-			'button',
-			{
-				onClick: function () {
-					return _this.setState({
-						liked: true,
-					});
+			'div',
+			null,
+			React.createElement(
+				'button',
+				{
+					onClick: function () {
+						return _this.setState({
+							liked: true,
+						});
+					},
 				},
-			},
-			'\u559C\u6B22'
+				'\u559C\u6B22'
+			),
+			React.createElement(ChildCmp, {
+				liked: this.state.liked,
+			})
 		);
 	}
 }

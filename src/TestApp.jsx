@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 
+class ChildCmp extends Component {
+  render() {
+    return <button>{this.props.liked ? '喜欢' : '不喜欢'}</button>
+  }
+}
+
 class TestApp extends Component {
   state = {
     liked: false
   }
 
   render() {
-    if (this.state.liked) {
-      return <span>已喜欢!</span>
-    }
-
-    return <button onClick={() => this.setState({ liked: true })}>喜欢</button>
+    return <div>
+      <button onClick={() => this.setState({ liked: true })}>喜欢</button>
+      <ChildCmp liked={this.state.liked} />
+    </div>
   }
 }
 
